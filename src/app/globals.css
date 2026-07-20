@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-display);
+}
+
+:root {
+  --cra-black: #0a0a0b;
+  --cra-graphite: #2c2c32;
+  --cra-yellow: #f5c518;
+  --cra-gold: #c9a227;
+  --cra-lime: #b6ff3c;
+  --cra-ink: #171719;
+  --cra-ink-muted: #6f6f78;
+  --cra-bg: #fdfcf9;
+}
+
+body {
+  background: var(--cra-bg);
+  color: var(--cra-ink);
+}
+
+/* Placeholder visual quando nao ha foto real ainda — nunca foto fake,
+   conforme decidido na estrategia de conteudo. */
+.cra-photo-placeholder {
+  background: linear-gradient(135deg, var(--cra-black), var(--cra-graphite));
+}
