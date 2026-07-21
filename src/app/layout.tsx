@@ -43,6 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/agenda" className="hover:text-[var(--cra-black)]">
                 Agenda
               </Link>
+              <Link href="/desafios" className="hover:text-[var(--cra-black)]">
+                Desafios
+              </Link>
               <Link href="/como-participar" className="hover:text-[var(--cra-black)]">
                 Como participar
               </Link>
@@ -66,13 +69,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
               <Link href="/cidades">Cidades</Link>
               <Link href="/agenda">Agenda</Link>
+              <Link href="/desafios">Desafios</Link>
               <Link href="/como-participar">Como participar</Link>
+              <Link href="/sobre">Sobre</Link>
+              <Link href="/faq">FAQ</Link>
+              <Link href="/contato">Contato</Link>
               <a href="https://corre-cra.vercel.app" target="_blank" rel="noreferrer">
                 App do Desafio CRA
               </a>
             </div>
           </div>
         </footer>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SportsOrganization",
+              name: "CRA — Corredores de Rua Anônimos",
+              description:
+                "Comunidade gratuita de corrida nascida em Blumenau/SC, sem mensalidade e aberta a qualquer pessoa.",
+              url: "https://cra-site.vercel.app",
+              logo: "https://cra-site.vercel.app/cra-logo.png",
+            }),
+          }}
+        />
       </body>
     </html>
   );
