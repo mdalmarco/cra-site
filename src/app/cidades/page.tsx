@@ -1,5 +1,11 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
+
+export const metadata: Metadata = {
+  title: "Cidades — CRA",
+  description: "Ache o grupo do CRA na sua cidade: dia, horário e local dos encontros semanais.",
+};
 
 export default async function CidadesPage() {
   const supabase = createClient();

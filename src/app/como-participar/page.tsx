@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Como participar — CRA",
+  description: "Não precisa saber correr nem pagar nada. Veja como aparecer no seu primeiro encontro do CRA.",
+};
 
 const faqs = [
   {

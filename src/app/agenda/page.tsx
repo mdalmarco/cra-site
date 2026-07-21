@@ -1,4 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Agenda — CRA",
+  description: "Todos os próximos corres semanais, treinões e eventos especiais do CRA.",
+};
 
 export default async function AgendaPage() {
   const supabase = createClient();
