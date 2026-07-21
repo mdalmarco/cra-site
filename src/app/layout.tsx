@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
 import { Geist, Bebas_Neue } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const bebasNeue = Bebas_Neue({ variable: "--font-display", weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cra-site.vercel.app"),
   title: "CRA — Corredores de Rua Anonimos",
   description:
     "Comunidade gratuita de corrida. Sem mensalidade, sem cobranca. Ache seu grupo, apareca num encontro, faca parte.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/cra-logo-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: "/cra-logo-192.png",
+  },
+  openGraph: {
+    images: ["/cra-logo-512.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,11 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <header className="sticky top-0 z-40 border-b border-neutral-200 bg-[var(--cra-bg)]/90 backdrop-blur-md">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-            <Link
-              href="/"
-              className="font-[family-name:var(--font-display)] text-2xl tracking-wide text-[var(--cra-black)]"
-            >
-              CRA
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/cra-logo.png" alt="CRA — Corredores de Rua Anônimos" width={40} height={40} className="rounded-full" />
+              <span className="font-[family-name:var(--font-display)] text-2xl tracking-wide text-[var(--cra-black)]">
+                CRA
+              </span>
             </Link>
             <nav className="hidden gap-6 text-sm font-medium text-[var(--cra-ink-muted)] sm:flex">
               <Link href="/cidades" className="hover:text-[var(--cra-black)]">
@@ -46,7 +58,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <footer className="border-t border-neutral-200 bg-[var(--cra-black)] py-10 text-neutral-300">
           <div className="mx-auto max-w-5xl px-4">
-            <p className="font-[family-name:var(--font-display)] text-2xl tracking-wide text-[var(--cra-yellow)]">
+            <Image src="/cra-logo.png" alt="CRA" width={56} height={56} className="rounded-full" />
+            <p className="mt-3 font-[family-name:var(--font-display)] text-2xl tracking-wide text-[var(--cra-yellow)]">
               CRA
             </p>
             <p className="mt-1 text-sm">Corredores de Rua Anonimos — comunidade gratuita, sem mensalidade.</p>
