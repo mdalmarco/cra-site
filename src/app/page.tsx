@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { MapPin, Footprints, HandHeart, Medal } from "lucide-react";
+import { Reveal } from "@/components/reveal";
+import { ParallaxHero } from "@/components/parallax-hero-bg";
 
 export default async function HomePage() {
   const supabase = createClient();
@@ -43,25 +45,25 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero — tela quase inteira, tom mais humano, CTA com desejo */}
-      <section className="cra-photo-placeholder relative flex min-h-[92svh] items-end px-4 pb-14 pt-24 text-white sm:items-center sm:justify-center sm:text-center">
-        <div className="max-w-xl">
-          <h1 className="font-[family-name:var(--font-display)] text-5xl leading-none tracking-wide sm:text-6xl">
+      {/* Hero — tela inteira, parallax discreto, tipografia oversized, assimetrico */}
+      <ParallaxHero>
+        <div className="max-w-2xl">
+          <h1 className="font-[family-name:var(--font-display)] text-[15vw] leading-[0.85] tracking-wide sm:text-8xl md:text-9xl">
             CORRA.
             <br />
             PERTENÇA.
           </h1>
-          <p className="mt-4 text-lg text-neutral-200">
+          <p className="mt-6 max-w-md text-lg text-neutral-200">
             Toda semana, gente de todo tipo sai de casa pra correr junto. Você só precisa aparecer.
           </p>
           <Link
             href="/cidades"
-            className="mt-6 inline-block rounded-full bg-[var(--cra-yellow)] px-8 py-4 text-base font-bold text-black transition-transform hover:scale-105"
+            className="mt-8 inline-block rounded-full bg-[var(--cra-yellow)] px-8 py-4 text-base font-bold text-black transition-transform hover:scale-105"
           >
             Quero correr com o CRA →
           </Link>
         </div>
-      </section>
+      </ParallaxHero>
 
       {/* Prova social — logo apos o hero, so numero real */}
       <section className="border-y border-neutral-200 bg-white py-5">
@@ -81,124 +83,138 @@ export default async function HomePage() {
 
       {/* Desafio atual — gamificacao, dados reais */}
       {challenge && (
-        <section className="mx-auto max-w-3xl px-4 py-10">
-          <div className="cra-photo-placeholder rounded-2xl p-6 text-white">
-            <div className="flex items-center justify-between">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[var(--cra-yellow)]">
-                Desafio atual
+        <section className="mx-auto max-w-3xl px-6 py-14 sm:px-16">
+          <Reveal>
+            <div className="cra-photo-placeholder rounded-2xl p-6 text-white">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--cra-yellow)]">
+                  Desafio atual
+                </p>
+                {leaderCity && (
+                  <span className="text-xs text-neutral-300">🏆 Cidade líder: {leaderCity}</span>
+                )}
+              </div>
+              <p className="mt-1 font-[family-name:var(--font-display)] text-2xl tracking-wide">
+                {challenge.name}
               </p>
-              {leaderCity && (
-                <span className="text-xs text-neutral-300">🏆 Cidade líder: {leaderCity}</span>
-              )}
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/20">
+                <div className="h-full rounded-full bg-[var(--cra-yellow)]" style={{ width: `${challengeProgress}%` }} />
+              </div>
+              <div className="mt-2 flex items-center justify-between text-xs text-neutral-300">
+                <span>{challengeProgress}% do período</span>
+                <Link href="/desafios" className="underline">
+                  Ver detalhes →
+                </Link>
+              </div>
             </div>
-            <p className="mt-1 font-[family-name:var(--font-display)] text-2xl tracking-wide">
-              {challenge.name}
-            </p>
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/20">
-              <div className="h-full rounded-full bg-[var(--cra-yellow)]" style={{ width: `${challengeProgress}%` }} />
-            </div>
-            <div className="mt-2 flex items-center justify-between text-xs text-neutral-300">
-              <span>{challengeProgress}% do período</span>
-              <Link href="/desafios" className="underline">
-                Ver detalhes →
-              </Link>
-            </div>
-          </div>
+          </Reveal>
         </section>
       )}
 
       {/* Como funciona — icones, nao numero */}
-      <section className="mx-auto max-w-3xl px-4 py-14">
-        <h2 className="font-[family-name:var(--font-display)] text-3xl tracking-wide text-[var(--cra-black)]">
-          COMO FUNCIONA
-        </h2>
-        <div className="mt-8 grid gap-8 sm:grid-cols-3">
-          <div>
+      <section className="mx-auto max-w-4xl px-6 py-24 sm:px-16">
+        <Reveal>
+          <h2 className="font-[family-name:var(--font-display)] text-4xl tracking-wide text-[var(--cra-black)] sm:ml-12">
+            COMO FUNCIONA
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid gap-10 sm:grid-cols-3">
+          <Reveal delay={0}>
             <MapPin className="h-8 w-8 text-[var(--cra-gold)]" />
-            <p className="mt-2 font-semibold">Ache sua cidade</p>
+            <p className="mt-3 font-semibold">Ache sua cidade</p>
             <p className="text-sm text-[var(--cra-ink-muted)]">Veja onde e quando o CRA se encontra perto de você.</p>
-          </div>
-          <div>
+          </Reveal>
+          <Reveal delay={0.08}>
             <Footprints className="h-8 w-8 text-[var(--cra-gold)]" />
-            <p className="mt-2 font-semibold">Apareça</p>
+            <p className="mt-3 font-semibold">Apareça</p>
             <p className="text-sm text-[var(--cra-ink-muted)]">
               Não precisa saber correr, nem se inscrever antes.
             </p>
-          </div>
-          <div>
+          </Reveal>
+          <Reveal delay={0.16}>
             <HandHeart className="h-8 w-8 text-[var(--cra-gold)]" />
-            <p className="mt-2 font-semibold">Faça amigos</p>
+            <p className="mt-3 font-semibold">Faça amigos</p>
             <p className="text-sm text-[var(--cra-ink-muted)]">Comunidade de verdade, ninguém corre sozinho.</p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Proximos encontros */}
       {upcomingEvents && upcomingEvents.length > 0 && (
-        <section className="bg-neutral-50 py-16">
-          <div className="mx-auto max-w-5xl px-4">
-            <h2 className="font-[family-name:var(--font-display)] text-3xl tracking-wide text-[var(--cra-black)]">
-              PRÓXIMOS ENCONTROS
-            </h2>
-            <div className="mt-6 flex gap-4 overflow-x-auto pb-2">
-              {upcomingEvents.map((ev) => (
-                <div
-                  key={ev.id}
-                  className="min-w-[240px] rounded-2xl border border-neutral-200 bg-white p-5 transition-shadow hover:shadow-md"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-widest text-[var(--cra-gold)]">
-                    {new Date(ev.start_at).toLocaleDateString("pt-BR", { weekday: "long" })}
-                  </p>
-                  <p className="mt-1 font-semibold">{ev.name}</p>
-                  <p className="mt-1 text-sm text-[var(--cra-ink-muted)]">
-                    {ev.location ?? ev.city} —{" "}
-                    {new Date(ev.start_at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <Link href="/agenda" className="mt-4 inline-block text-sm font-semibold underline">
-              Ver agenda completa →
-            </Link>
+        <section className="bg-neutral-50 py-24">
+          <div className="mx-auto max-w-5xl px-6 sm:px-16">
+            <Reveal>
+              <h2 className="font-[family-name:var(--font-display)] text-4xl tracking-wide text-[var(--cra-black)]">
+                PRÓXIMOS ENCONTROS
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="mt-10 flex gap-4 overflow-x-auto pb-2">
+                {upcomingEvents.map((ev) => (
+                  <div
+                    key={ev.id}
+                    className="min-w-[240px] rounded-2xl border border-neutral-200 bg-white p-5 transition-shadow hover:shadow-md"
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[var(--cra-gold)]">
+                      {new Date(ev.start_at).toLocaleDateString("pt-BR", { weekday: "long" })}
+                    </p>
+                    <p className="mt-1 font-semibold">{ev.name}</p>
+                    <p className="mt-1 text-sm text-[var(--cra-ink-muted)]">
+                      {ev.location ?? ev.city} —{" "}
+                      {new Date(ev.start_at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <Link href="/agenda" className="mt-6 inline-block text-sm font-semibold underline">
+                Ver agenda completa →
+              </Link>
+            </Reveal>
           </div>
         </section>
       )}
 
       {/* Cidades — com contagem real de membros */}
-      <section className="mx-auto max-w-5xl px-4 py-16">
-        <h2 className="font-[family-name:var(--font-display)] text-3xl tracking-wide text-[var(--cra-black)]">
-          NOSSAS CIDADES
-        </h2>
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {(cities ?? []).map((c) => (
-            <Link
-              key={c.slug}
-              href={`/cidades/${c.slug}`}
-              className="rounded-xl border border-neutral-200 bg-white p-4 transition-colors hover:border-[var(--cra-yellow)]"
-            >
-              <p className="flex items-center gap-1.5 font-medium">
-                <MapPin className="h-4 w-4 text-[var(--cra-gold)]" /> {c.name}
-              </p>
-              {c.member_count > 0 && (
-                <p className="mt-1 text-xs text-[var(--cra-ink-muted)]">{c.member_count} corredores</p>
-              )}
-            </Link>
-          ))}
-        </div>
+      <section className="mx-auto max-w-5xl px-6 py-24 sm:px-16">
+        <Reveal>
+          <h2 className="font-[family-name:var(--font-display)] text-4xl tracking-wide text-[var(--cra-black)]">
+            NOSSAS CIDADES
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {(cities ?? []).map((c) => (
+              <Link
+                key={c.slug}
+                href={`/cidades/${c.slug}`}
+                className="rounded-xl border border-neutral-200 bg-white p-4 transition-colors hover:border-[var(--cra-yellow)]"
+              >
+                <p className="flex items-center gap-1.5 font-medium">
+                  <MapPin className="h-4 w-4 text-[var(--cra-gold)]" /> {c.name}
+                </p>
+                {c.member_count > 0 && (
+                  <p className="mt-1 text-xs text-[var(--cra-ink-muted)]">{c.member_count} corredores</p>
+                )}
+              </Link>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       {/* CTA final */}
-      <section className="cra-photo-placeholder px-4 py-16 text-center text-white">
-        <Medal className="mx-auto h-8 w-8 text-[var(--cra-yellow)]" />
-        <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl tracking-wide">
-          AGORA É A SUA VEZ
-        </h2>
-        <Link
-          href="/cidades"
-          className="mt-5 inline-block rounded-full bg-[var(--cra-yellow)] px-8 py-4 text-base font-bold text-black transition-transform hover:scale-105"
-        >
-          Quero correr com o CRA →
-        </Link>
+      <section className="cra-photo-placeholder px-6 py-24 text-center text-white">
+        <Reveal>
+          <Medal className="mx-auto h-8 w-8 text-[var(--cra-yellow)]" />
+          <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl tracking-wide">
+            AGORA É A SUA VEZ
+          </h2>
+          <Link
+            href="/cidades"
+            className="mt-6 inline-block rounded-full bg-[var(--cra-yellow)] px-8 py-4 text-base font-bold text-black transition-transform hover:scale-105"
+          >
+            Quero correr com o CRA →
+          </Link>
+        </Reveal>
       </section>
     </>
   );
