@@ -11,9 +11,19 @@
   --cra-yellow: #f5c518;
   --cra-gold: #c9a227;
   --cra-lime: #b6ff3c;
+  --cra-lime-ink: #3f7a12;
   --cra-ink: #171719;
-  --cra-ink-muted: #6f6f78;
+  --cra-ink-muted: #5c5c66;
   --cra-bg: #fdfcf9;
+}
+
+/* Foco de teclado sempre visivel — acessibilidade */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--cra-gold);
+  outline-offset: 2px;
 }
 
 body {
