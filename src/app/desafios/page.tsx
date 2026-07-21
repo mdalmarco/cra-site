@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 
@@ -11,7 +12,7 @@ export default async function DesafiosPage() {
   const supabase = createClient();
   const { data: challenge } = await supabase
     .from("challenges")
-    .select("name, start_date, end_date, award_date, registration_fee")
+    .select("name, start_date, end_date, award_date, registration_fee, prize_description, tagline")
     .order("created_at", { ascending: false })
     .limit(1)
     .maybeSingle();
@@ -24,7 +25,15 @@ export default async function DesafiosPage() {
 
   return (
     <div>
-      <div className="cra-photo-placeholder px-4 py-16 text-white">
+      <div className="relative flex min-h-[50svh] items-end px-4 pb-10 pt-24 text-white">
+        <Image
+          src="/desafio-cra-banner.jpg"
+          alt="Desafio CRA — Acumule pontos, supere limites"
+          fill
+          priority
+          className="-z-10 object-cover"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 to-black/10" />
         <div className="mx-auto max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-widest text-[var(--cra-yellow)]">
             Opcional — pra quem quer competir
@@ -32,6 +41,7 @@ export default async function DesafiosPage() {
           <h1 className="mt-2 font-[family-name:var(--font-display)] text-5xl tracking-wide">
             {challenge?.name.toUpperCase() ?? "DESAFIO CRA"}
           </h1>
+          {challenge?.tagline && <p className="mt-1 text-lg text-[var(--cra-yellow)]">{challenge.tagline}</p>}
           {challenge && (
             <p className="mt-2 text-neutral-300">
               {new Date(challenge.start_date).toLocaleDateString("pt-BR")} até{" "}
@@ -47,6 +57,15 @@ export default async function DesafiosPage() {
           um jeito extra de se engajar: acumular pontos participando dos encontros e provas com a
           camisa e a equipe CRA, disputar o ranking, e concorrer a prêmios ao longo do ano.
         </p>
+
+        {challenge?.prize_description && (
+          <div className="mt-8 rounded-2xl border border-[var(--cra-gold)] bg-[var(--cra-gold)]/10 p-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--cra-gold)]">
+              Prêmio final
+            </p>
+            <p className="mt-1 font-semibold text-[var(--cra-black)]">{challenge.prize_description}</p>
+          </div>
+        )}
 
         {activityTypes && activityTypes.length > 0 && (
           <div className="mt-8">
